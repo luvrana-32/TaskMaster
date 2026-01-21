@@ -7,7 +7,7 @@ import axios from "axios";
 
 const INITIAL_FORM = { email: "", password: "" };
 
-const Login = ({ onSubmit, OnSwitchMode }) => {
+const Login = ({ onSubmit, onSwitchMode }) => {
   const [showPassword, setShowpassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ const Login = ({ onSubmit, OnSwitchMode }) => {
 
   const handleSwitchMode = () => {
     toast.dismiss();
-    OnSwitchMode?.();
+    onSwitchMode?.();
   };
 
   const fields = [
