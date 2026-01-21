@@ -9,7 +9,8 @@ import {
 } from "../assets/dummy";
 import axios from "axios";
 
-const API_URL = "http://localhost:4000";
+const API_URL = "https://personal-task-tracker-app-backend.onrender.com";
+// const API_URL = "http://localhost:4000";
 const INITIAL_FORM = { name: "", email: "", password: "" };
 
 const Signup = ({ onSwitchMode }) => {

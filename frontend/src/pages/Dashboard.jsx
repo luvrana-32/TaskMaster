@@ -25,7 +25,8 @@ import TaskItem from "../components/TaskItem";
 import axios from "axios";
 import TaskModal from "../components/TaskModal";
 
-const API_BASE = "http://localhost:4000/api/tasks";
+const API_BASE = "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
+// const API_BASE = "http://localhost:4000/api/tasks";
 
 const Dashboard = () => {
   const { tasks, refreshTasks } = useOutletContext();

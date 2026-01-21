@@ -10,7 +10,8 @@ import axios from "axios";
 import { format, isToday } from "date-fns";
 import TaskModal from "./TaskModal";
 
-const API_BASE = "http://localhost:4000/api/tasks";
+// const API_BASE = "http://localhost:4000/api/tasks";
+const API_BASE = "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
 
 const TaskItem = ({
   task,
