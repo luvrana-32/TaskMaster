@@ -1,9 +1,19 @@
-import React, { useMemo, useState } from "react";
-import { layoutClasses, SORT_OPTIONS } from "../assets/dummy";
-import { Clock, FilterIcon, ListCheckIcon, Plus } from "lucide-react";
+import React, { useCallback, useMemo, useState } from "react";
+import { ADD_BUTTON, layoutClasses, SORT_OPTIONS } from "../assets/dummy";
+import {
+  Clock,
+  FilterIcon,
+  ListCheckIcon,
+  Plus,
+  PlusCircleIcon,
+} from "lucide-react";
 import { useOutletContext } from "react-router-dom";
 import TaskItem from "../components/TaskItem";
 import TaskModal from "../components/TaskModal";
+
+const API_BASE =
+  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
+// const API_BASE = "http://localhost:4000/api/tasks";
 
 const PendingPage = () => {
   const { tasks = {}, refreshTasks } = useOutletContext();
@@ -27,24 +37,48 @@ const PendingPage = () => {
     });
   }, [tasks, sortBy]);
 
+  const handleTaskSave = useCallback(async (taskData) => {
+    try {
+      if (taskData.id)
+        await axios.put(`${API_BASE}${taskData.id}/tm`, taskData);
+      refreshTasks();
+      setShowModel(false);
+      setSelectedTask(null);
+    } catch (error) {
+      console.error("Error saving tasks: ", error);
+    }
+  });
+
   return (
     <div className={layoutClasses.container}>
       <div className={layoutClasses.headerWrapper}>
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 flex items-center gap-2">
-            <ListCheckIcon className="text-purple-50" />
-            Pending Task
-          </h1>
-          <p className="text-sm text-gray-500 mt-1 ml-7">
-            {sortedPendingTasks.length} task
-            {sortedPendingTasks.length !== 1 && "s"} needing your attention
-          </p>
+        <div
+          className="flex flex-col sm:flex-row w-full sm:items-center justify-between bg-one/50
+         rounded-2xl p-4 shadow-sm border border-one gap-3"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <ListCheckIcon className="w-10 h-10 text-maintxt shrink-0" />
+
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-maintxt truncate">
+                <span className="truncate">Pending Tasks</span>
+              </h1>
+              <p className="text-xs md:text-sm text-maintxt/50">
+                {sortedPendingTasks.length} task
+                {sortedPendingTasks.length !== 1 && "s"} needing your attention
+              </p>
+            </div>
+          </div>
+          <button onClick={() => setShowModel(true)} className={ADD_BUTTON}>
+            <PlusCircleIcon size={22} />
+            Add New Task
+          </button>
         </div>
 
         <div className={layoutClasses.sortBox}>
-          <div className="flex items-center gap-2 text-gray-700 font-medium">
-            <FilterIcon className="w-4 h-4 text-purple-500" />
-            <span className="text-sm">Sort By </span>
+          <div className="flex items-center gap-2 text-maintxt font-medium">
+            <FilterIcon className="w-6 h-6 text-maintxt" />
+            <span className="text-lg text-maintxt whitespace-nowrap">Sort by </span>
           </div>
 
           <select
@@ -52,9 +86,9 @@ const PendingPage = () => {
             onChange={(e) => setSortBy(e.target.value)}
             className={layoutClasses.select}
           >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="priority">By Priority</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="priority">Priority</option>
           </select>
 
           <div className={layoutClasses.tabWrapper}>
@@ -72,28 +106,18 @@ const PendingPage = () => {
         </div>
       </div>
 
-      <div className={layoutClasses.addBox} onClick={() => setShowModel(true)}>
-        <div
-          className="flex items-center justify-center gap-3 text-gray-500
-         group-hover:text-purple-600 transition-colors"
-        >
-          <Plus className="text-purple-500" size={18} />
-          <span className="font-medium">Add New Task</span>
-        </div>
-      </div>
-
       <div className="space-y-4">
         {sortedPendingTasks.length === 0 ? (
           <div className={layoutClasses.emptyState}>
             <div className="max-w-xs mx-auto py-6">
               <div className={layoutClasses.emptyIconBg}>
-                <Clock className="w-8 h-8 text-purple-500" />
+                <Clock className="w-8 h-8 text-maintxt" />
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-maintxt mb-2">
                 All caught up!
               </h3>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm text-maintxt/50 mb-4">
                 No pending tasks - Greate Work!
               </p>
               <button
@@ -127,9 +151,9 @@ const PendingPage = () => {
         onClose={() => {
           setShowModel(false);
           setSelectedTask(null);
-          refreshTasks();
         }}
         taskToEdit={selectedTask}
+        onSave={handleTaskSave}
       />
     </div>
   );

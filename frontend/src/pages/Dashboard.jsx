@@ -25,7 +25,8 @@ import TaskItem from "../components/TaskItem";
 import axios from "axios";
 import TaskModal from "../components/TaskModal";
 
-const API_BASE = "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
+const API_BASE =
+  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
 // const API_BASE = "http://localhost:4000/api/tasks";
 
 const Dashboard = () => {
@@ -40,7 +41,7 @@ const Dashboard = () => {
       lowPriority: tasks.filter((t) => t.priority?.toLowerCase() === "low")
         .length,
       mediumPriority: tasks.filter(
-        (t) => t.priority?.toLowerCase() === "medium"
+        (t) => t.priority?.toLowerCase() === "medium",
       ).length,
       highPriority: tasks.filter((t) => t.priority?.toLowerCase() === "high")
         .length,
@@ -48,13 +49,11 @@ const Dashboard = () => {
         (t) =>
           t.completed === true ||
           t.completed === 1 ||
-          (
-            typeof t.completed === "string" &&
-            t.completed.toLowerCase() === "yes"
-          )
+          (typeof t.completed === "string" &&
+            t.completed.toLowerCase() === "yes"),
       ).length,
     }),
-    [tasks]
+    [tasks],
   );
 
   const filteredTasks = useMemo(
@@ -77,7 +76,7 @@ const Dashboard = () => {
             return true;
         }
       }),
-    [tasks, filter]
+    [tasks, filter],
   );
 
   const handleTaskSave = useCallback(async (taskData) => {
@@ -96,14 +95,18 @@ const Dashboard = () => {
     <div className={WRAPPER}>
       {/* header */}
       <div className={HEADER}>
-        <div className="min-w-0">
-          <h1 className="text-xl md:text-3xl font-bold text-gray-800 flex items-center gap-2">
-            <HomeIcon className="text-purple-500 w-5 h-5 md:w-6 md:h-6 shrink-0" />
-            <span className="truncate">Task Overview</span>
-          </h1>
-          <p className="text-sm text-gray-500 mt-1 ml-7 truncate">
-            Manage your task efficiently
-          </p>
+        <div className="flex gap-4 min-w-0">
+          <div className="flex items-center justify-center shrink-0">
+            <HomeIcon className="w-10 h-10 text-maintxt" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <h1 className="text-xl md:text-3xl font-bold text-maintxt leading-tight">
+              Task Overview
+            </h1>
+            <p className="text-sm text-maintxt/60 leading-tight ml-1">
+              Manage your task efficiently
+            </p>
+          </div>
         </div>
         <button onClick={() => setShowModel(true)} className={ADD_BUTTON}>
           <PlusCircleIcon size={22} />
@@ -119,7 +122,7 @@ const Dashboard = () => {
             label,
             icon: Icon,
             iconColor,
-            borderColor = "border-purple-100",
+            borderColor,
             valueKey,
             textColor,
             gradient,
@@ -134,7 +137,7 @@ const Dashboard = () => {
                   <p
                     className={`${VALUE_CLASS} ${
                       gradient
-                        ? "bg-linear-to-r from-fuchsia-500 to-purple-600 bg-clip-text text-transparent"
+                        ? "bg-linear-to-r from-maintxt/70 to-two bg-clip-text text-transparent"
                         : textColor
                     }`}
                   >
@@ -144,17 +147,17 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
 
       {/* contents */}
-      <div className="space-y-6">
+      <div className="space-y-3 md:space-y-4">
         {/* filter */}
         <div className={FILTER_WRAPPER}>
           <div className="flex items-center gap-2 min-w-0">
-            <FilterIcon className="w-5 h-5 text-purple-500 shrink-0" />
-            <h2 className="text-base md:text-lg font-semibold text-gray-800 truncate">
+            <FilterIcon className="w-5 h-5 text-maintxt shrink-0" />
+            <h2 className="text-base md:text-lg font-semibold text-maintxt truncate">
               {FILTER_LABELS[filter]}
             </h2>
           </div>
@@ -186,16 +189,16 @@ const Dashboard = () => {
         </div>
 
         {/* task list */}
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {filteredTasks.length === 0 ? (
             <div className={EMPTY_STATE.wrapper}>
               <div className={EMPTY_STATE.iconWrapper}>
-                <Calendar className="w-8 h-8 text-purple-500" />
+                <Calendar className="w-8 h-8 text-maintxt" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-maintxt mb-1">
                 No tasks found
               </h3>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm text-maintxt/50 mb-4">
                 {filter === "all"
                   ? "Create your first task to get started"
                   : "No tasks match this filter"}
@@ -225,12 +228,12 @@ const Dashboard = () => {
 
         {/* add task desktop */}
         <div
-          className="hidden md:flex items-center justify-center p-2 border-2 border-dashed border-purple-200
-         rounded-xl hover:border-purple-400 bg-purple-50/50 cursor-pointer transition-colors"
+          className="hidden md:flex items-center justify-center p-2 border-2 border-dashed border-two
+         rounded-xl hover:border-maintxt  text-one hover:text-maintxt bg-one/50 cursor-pointer transition-colors"
           onClick={() => setShowModel(true)}
         >
-          <PlusCircleIcon className="w-5 h-5 text-purple-500 mr-2" />
-          <span className="text-gray-600 font-medium">Add New Task</span>
+          <PlusCircleIcon className="w-5 h-5 mr-2" />
+          <span className="font-medium">Add New Task</span>
         </div>
       </div>
 

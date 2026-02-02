@@ -86,27 +86,29 @@ const Login = ({ onSubmit, onSwitchMode }) => {
   ];
 
   return (
-    <div className="max-w-md bg-white w-full shadow-lg border border-purple-100 rounded-xl p-8">
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+    <div className="max-w-md bg-one/50 w-full shadow-lg border border-one rounded-2xl p-8">
+      <ToastContainer theme="dark" position="top-center" autoClose={3000} hideProgressBar />
 
-      <div className="mb-6 text-center">
+      <div className="mb-3 text-center">
         <div
-          className="w-16 h-16 bg-linear-to-br from-fuchsia-500 to-purple-600 rounded-full
-         mx-auto flex items-center justify-center mb-4"
+          className="w-16 h-16 bg-linear-to-br from-two to-one shadow-lg rounded-full
+         mx-auto flex items-center justify-center mb-3"
         >
-          <LogIn className="w-8 h-8 text-white" />
+          <LogIn className="w-8 h-8 text-maintxt" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-800">Welcome Back</h2>
-        <p className="text-gray-500 text-sm mt-1">
-          Sign in to continue to TaskFlow
+        <h2 className="text-3xl font-bold text-maintxt">Welcome Back</h2>
+        <p className="text-maintxt/50 text-sm">
+          Sign in to continue to{" "}
+          <span className="font-medium text-maintxt/70">TaskMaster</span>
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {fields.map(({ name, type, placeholder, icon: Icon, isPassword }) => (
           <div key={name} className={INPUTWRAPPER}>
-            <Icon className="text-purple-500 w-5 h-5 mr-2" />
+            <Icon className="text-maintxt w-5 h-5 mr-2" />
             <input
+              className="w-full bg-transparent text-maintxt focus:outline-none focus:ring-0 appearance-none text-sm"
               type={type}
               placeholder={placeholder}
               value={formData[name]}
@@ -114,13 +116,12 @@ const Login = ({ onSubmit, onSwitchMode }) => {
                 name === "email"
                   ? "email"
                   : name === "password"
-                  ? "current-password"
-                  : "off"
+                    ? "current-password"
+                    : "off"
               }
               onChange={(e) =>
                 setFormData({ ...formData, [name]: e.target.value })
               }
-              className="w-full focus:outline-none text-sm text-gray-700"
               required
             />
 
@@ -128,7 +129,7 @@ const Login = ({ onSubmit, onSwitchMode }) => {
               <button
                 type="button"
                 onClick={() => setShowpassword((prev) => !prev)}
-                className="ml-2 text-gray-500 hover:text-purple-500 transition-colors"
+                className="ml-2 text-maintxt/50 hover:text-maintxt transition-colors"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -146,12 +147,14 @@ const Login = ({ onSubmit, onSwitchMode }) => {
             id="rememberMe"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
-            className="h-4 w-4 text-purple-500 focus:ring-purple-400 border-gray-300 rounded"
+            className="h-4 w-4 appearance-none bg-two/70 border border-one rounded-md
+     checked:border-maintxt checked:before:content-['✔'] checked:before:text-maintxt checked:before:flex
+     checked:before:items-center checked:before:justify-center checked:before:-translate-y-1.25"
             required
           />
           <label
             htmlFor="rememberMe"
-            className="ml-2 block text-sm text-gray-700"
+            className="ml-2 block text-sm text-maintxt"
           >
             Remember Me
           </label>
@@ -162,17 +165,17 @@ const Login = ({ onSubmit, onSwitchMode }) => {
             "Logging in..."
           ) : (
             <>
-              <LogIn className="w-4 h-4" />
+              <LogIn className="w-4 h-4 text-maintxt" />
               LogIn
             </>
           )}
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-600 mt-6">
+      <p className="text-center text-sm text-maintxt/50 mt-4">
         Dont have an account{" "}
         <button
-          className="text-purple-600 hover:text-purple-700 hover:underline font-medium transition-colors"
+          className="text-maintxt/70 cursor-pointer hover:text-maintxt hover:underline font-medium transition-colors"
           onClick={handleSwitchMode}
         >
           Sign Up

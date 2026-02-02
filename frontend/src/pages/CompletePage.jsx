@@ -1,12 +1,19 @@
-import React, { useMemo, useState } from "react";
-import { CT_CLASSES, SORT_OPTIONS } from "../assets/dummy";
-import { CheckCircle2, FilterIcon } from "lucide-react";
+import React, { useCallback, useMemo, useState } from "react";
+import { ADD_BUTTON, CT_CLASSES, SORT_OPTIONS } from "../assets/dummy";
+import { CheckCircle2, FilterIcon, PlusCircleIcon } from "lucide-react";
 import { useOutletContext } from "react-router-dom";
 import TaskItem from "../components/TaskItem";
+import TaskModal from "../components/TaskModal";
+
+const API_BASE =
+  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
+// const API_BASE = "http://localhost:4000/api/tasks";
 
 const CompletePage = () => {
   const { tasks = [], refreshTasks } = useOutletContext();
   const [sortBy, setSortBy] = useState("newest");
+  const [showModel, setShowModel] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const sortedCompletedTasks = useMemo(() => {
     return tasks
@@ -35,40 +42,64 @@ const CompletePage = () => {
       });
   }, [tasks, sortBy]);
 
+  const handleTaskSave = useCallback(async (taskData) => {
+    try {
+      if (taskData.id)
+        await axios.put(`${API_BASE}${taskData.id}/tm`, taskData);
+      refreshTasks();
+      setShowModel(false);
+      setSelectedTask(null);
+    } catch (error) {
+      console.error("Error saving tasks: ", error);
+    }
+  });
+
   return (
     <div className={CT_CLASSES.page}>
       {/* header */}
       <div className={CT_CLASSES.header}>
         <div className={CT_CLASSES.titleWrapper}>
-          <h1 className={CT_CLASSES.title}>
-            <CheckCircle2 className="w-5 h-5 text-purple-500 md:w-6 md:h-6" />
-            <span className="truncate">Completed Tasks</span>
-          </h1>
+          {/* LEFT: ICON + TEXT */}
+          <div className="flex items-center gap-3 min-w-0">
+            <CheckCircle2 className="w-10 h-10 text-maintxt shrink-0" />
 
-          <p className={CT_CLASSES.subtitle}>
-            {sortedCompletedTasks.length} task
-            {sortedCompletedTasks.length !== 1 && "s"} marked as completed
-          </p>
+            <div className="flex flex-col min-w-0">
+              <h1 className={CT_CLASSES.title}>
+                <span className="truncate">Completed Tasks</span>
+              </h1>
+              <p className={CT_CLASSES.subtitle}>
+                {sortedCompletedTasks.length} task
+                {sortedCompletedTasks.length !== 1 && "s"} marked as completed
+              </p>
+            </div>
+          </div>
+
+          {/* RIGHT: ADD BUTTON */}
+          <button onClick={() => setShowModel(true)} className={ADD_BUTTON}>
+            <PlusCircleIcon size={22} />
+            Add New Task
+          </button>
         </div>
 
         {/* sort control */}
         <div className={CT_CLASSES.sortContainer}>
           <div className={CT_CLASSES.sortBox}>
             <div className={CT_CLASSES.filterLabel}>
-              <FilterIcon className="w-4 h-4 text-purple-500" />
-              <span className="text-xs md:text-sm">Sort by </span>
+              <FilterIcon className="w-6 h-6 text-maintxt" />
+              <span className="text-lg text-maintxt whitespace-nowrap">
+                Sort by
+              </span>
             </div>
 
-            {/* mobile dropdown */}
+            {/* mobile */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className={CT_CLASSES.select}
             >
               {SORT_OPTIONS.map((opt) => (
-                <option value={opt.id} key={opt.id}>
+                <option key={opt.id} value={opt.id}>
                   {opt.label}
-                  {opt.id === "newest" ? "First" : ""}
                 </option>
               ))}
             </select>
@@ -100,7 +131,7 @@ const CompletePage = () => {
         {sortedCompletedTasks.length === 0 ? (
           <div className={CT_CLASSES.emptyState}>
             <div className={CT_CLASSES.emptyIconWrapper}>
-              <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 text-purple-500" />
+              <CheckCircle2 className="w-8 h-8 text-maintxt" />
             </div>
             <h3 className={CT_CLASSES.emptyTitle}>No completed tasks yet!</h3>
             <p className={CT_CLASSES.emptyText}>
@@ -119,6 +150,17 @@ const CompletePage = () => {
           ))
         )}
       </div>
+
+      {/* modal */}
+      <TaskModal
+        isOpen={showModel || !!selectedTask}
+        onClose={() => {
+          setShowModel(false);
+          setSelectedTask(null);
+        }}
+        taskToEdit={selectedTask}
+        onSave={handleTaskSave}
+      />
     </div>
   );
 };

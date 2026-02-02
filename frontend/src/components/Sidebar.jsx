@@ -61,27 +61,27 @@ const Sidebar = ({ user, tasks }) => {
     <>
       {/* Desktop Sidebar */}
       <div className={SIDEBAR_CLASSES.desktop}>
-        <div className="p-5 border-b border-purple-100 lg:block hidden">
+        <div className="p-5 border-b border-one lg:block hidden">
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-full bg-linear-to-br from-fuchsia-500 to-purple-600
-             flex items-center justify-center text-white font-bold shadow-md"
+              className="w-10 h-10 rounded-full bg-linear-to-br from-two to-one
+             flex items-center justify-center text-maintxt font-bold shadow-md"
             >
               {initial}
             </div>
 
             <div>
-              <h2 className="text-lg font-bold text-gray-800">
+              <h2 className="text-lg font-bold text-maintxt">
                 Hey, {username}
               </h2>
-              <p className="text-sm text-purple-500 font-medium flex items-center gap-1">
+              <p className="text-sm text-one font-medium flex items-center gap-1">
                 <Sparkles className="w-3 h-3" /> Let's crush some tasks!
               </p>
             </div>
           </div>
         </div>
 
-        <div className="p-4 space-y-6 overflow-y-auto flex-1">
+        <div className="p-4 space-y-6 flex-1">
           <div className={PRODUCTIVITY_CARD.container}>
             <div className={PRODUCTIVITY_CARD.header}>
               <h3 className={PRODUCTIVITY_CARD.label}>PRODUCTIVITY</h3>
@@ -97,11 +97,11 @@ const Sidebar = ({ user, tasks }) => {
 
           {renderMenuItems()}
 
-          <div className="ml-auto pt6 lg:block hidden">
+          <div className="ml-auto pt-6 lg:block hidden">
             <div className={TIP_CARD.container}>
               <div className="flex items-center gap-2">
                 <div className={TIP_CARD.iconWrapper}>
-                  <HatGlasses className="w-5 h-5 text-purple-600" />
+                  <HatGlasses className="w-5 h-5 text-maintxt" />
                 </div>
 
                 <div>
@@ -112,7 +112,7 @@ const Sidebar = ({ user, tasks }) => {
                   <a
                     href="https://aayushshaw.vercel.app/"
                     target="_blank"
-                    className="block mt-2 text-sm text-purple-500 hover:underline"
+                    className="block mt-2 text-sm text-maintxt/50 hover:text-maintxt hover:underline"
                   >
                     Click to Connect
                   </a>
@@ -124,16 +124,30 @@ const Sidebar = ({ user, tasks }) => {
       </div>
 
       {/* Mobile menu */}
+      {/* Mobile quick nav (replaces menu button) */}
       {!mobileOpen && (
-        <button
-          onClick={() => setMobileOpen(true)}
-          className={SIDEBAR_CLASSES.mobileButton}
-        >
-          <Menu className="w-5 h-5" />
-        </button>
+        <div className={SIDEBAR_CLASSES.mobileButton + " flex"}>
+          {menuItems.map(({ text, path, icon }) => (
+            <NavLink
+              key={text}
+              to={path}
+              className={({ isActive }) =>
+                `flex items-start gap-1 px-2 py-2 rounded-2xl text-sm sm:text-base font-medium transition-all
+                  ${isActive ? "bg-two/70 border border-l-3 sm:border-l-4 border-one text-maintxt font-medium shadow-sm"
+                     : "hover:bg-two/50 text-maintxt/50 hover:text-maintxt"}`
+              }
+            >
+              <span className="w-3 h-3 mr-2">{icon}</span>
+              <span className="inline sm:hidden items-start">
+                {text.split(" ")[0]}
+              </span>
+              <span className="sm:inline hidden items-start">{text}</span>
+            </NavLink>
+          ))}
+        </div>
       )}
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer
       {mobileOpen && (
         <div className="fix inset-0 z-40">
           <div
@@ -145,27 +159,27 @@ const Sidebar = ({ user, tasks }) => {
             className={SIDEBAR_CLASSES.mobileDrawer}
             onclick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center mb-4 border-b pb-2">
-              <h2 className="text-lg font-bold text-purple-600">Menu</h2>
+            <div className="flex justify-between items-center mb-4 border-b border-one pb-2">
+              <h2 className="text-lg font-bold text-maintxt">Menu</h2>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="text-gray-700 hover:text-purple-600"
+                className="text-maintxt"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-6 mt-10">
               <div
-                className="w-10 h-10 rounded-full bg-linear-to-br from-fuchsia-500 to-purple-600
-             flex items-center justify-center text-white font-bold shadow-md"
+                className="w-12 h-12 rounded-full bg-linear-to-br from-two to-one
+             flex items-center justify-center text-maintxt text-xl font-bold shadow-md"
               >
                 {initial}
               </div>
               <div>
-                <h2 className="text-lg font-bold text-gray-800 mt-16">
+                <h2 className="text-lg font-bold text-maintxt">
                   Hey, {username}
                 </h2>
-                <p className="text-sm text-purple-500 font-medium flex items-center gap-1">
+                <p className="text-sm text-maintxt/50 font-medium flex items-center gap-1">
                   <Sparkles className="w-3 h-3" /> Let's crush some tasks!
                 </p>
               </div>
@@ -174,7 +188,7 @@ const Sidebar = ({ user, tasks }) => {
             {renderMenuItems(true)}
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

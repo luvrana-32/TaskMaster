@@ -16,6 +16,47 @@ const App = () => {
   });
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // No token → force logout
+    if (!token) {
+      setCurrentUser(null);
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    // Validate token with backend
+    (async () => {
+      try {
+        const res = await fetch(
+          "https://personal-task-tracker-app-backend.onrender.com/api/user/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (!res.ok) throw new Error("Token expired");
+
+        const data = await res.json();
+
+        // Token valid → sync user
+        setCurrentUser({
+          email: data.user.email,
+          name: data.user.name,
+          avatar: data.user.avatar,
+        });
+      } catch (error) {
+        // Token expired / invalid
+        localStorage.clear();
+        setCurrentUser(null);
+        navigate("/login", { replace: true });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
     } else {
@@ -28,7 +69,7 @@ const App = () => {
       email: data.email,
       name: data.name || "User",
       avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
-        data.name || "User"
+        data.name || "User",
       )}&background=random`,
     };
     setCurrentUser(user);
@@ -36,7 +77,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setCurrentUser(null);
     navigate("/login", { replace: true });
   };
@@ -53,7 +94,7 @@ const App = () => {
         path="/login"
         element={
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center 
+            className="fixed inset-0 bg-basedark bg-opacity-50 flex items-center 
             justify-center"
           >
             <Login
@@ -68,7 +109,7 @@ const App = () => {
         path="/signup"
         element={
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center 
+            className="fixed inset-0 bg-basedark bg-opacity-50 flex items-center 
             justify-center"
           >
             <SignUp
