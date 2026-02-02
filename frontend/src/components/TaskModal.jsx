@@ -116,7 +116,7 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
 
           <button
             onClick={onClose}
-            className="p-2 hover:bg-one/30 rounded-xl transition-colors text-white hover:text-maintxt"
+            className="p-2 hover:bg-two bg-two/70 rounded-xl transition-colors text-white hover:text-maintxt"
           >
             <X className="w-5 h-5" />
           </button>
@@ -137,7 +137,7 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
               Task Title
             </label>
             <div
-              className="flex items-center border border-one rounded-xl px-3 py-2.5 focus-within:ring-2
+              className="flex items-center bg-two/70 border border-one rounded-2xl px-3 py-2.5 focus-within:ring-2
              focus-within:ring-maintxt focus-within:border-one transition-all duration-200"
             >
               <input

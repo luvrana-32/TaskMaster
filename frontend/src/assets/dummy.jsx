@@ -55,12 +55,12 @@ const backendDummy = [
 
 // assets/formConstants.js
 export const baseControlClasses =
-  "w-full px-4 py-2.5 border text-maintxt border-one rounded-xl focus:ring-2 focus:ring-maintxt focus:border-one focus:outline-none text-sm";
+  "w-full px-4 py-2.5 border text-maintxt border-one rounded-2xl bg-two/70 focus:ring-2 focus:ring-maintxt focus:border-one focus:outline-none text-sm";
 
 export const priorityStyles = {
-  Low: "bg-green-100/30 text-green-600",
-  Medium: "bg-orange-100/30 text-orange-600",
-  High: "bg-red-100/30 text-red-600",
+  Low: "bg-green-100/30 text-green-300",
+  Medium: "bg-orange-100/30 text-orange-300",
+  High: "bg-red-100/30 text-red-300",
 };
 
 // data/defaultTask.js
