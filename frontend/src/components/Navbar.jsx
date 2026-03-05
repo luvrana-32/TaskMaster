@@ -26,7 +26,7 @@ const Navbar = ({ user = {}, onLogout }) => {
   };
   return (
     <header
-      className="sticky top-0 z-50 sm:my-4 sm:mt-0 sm:rounded-b-3xl rounded-b-2xl bg-one/50 
+      className="sticky top-0 z-50 sm:my-4 sm:mt-0 sm:rounded-b-3xl rounded-b-3xl bg-one/50 
       backdrop-blur-xs shadow-sm border-b border-one"
     >
       <div className="flex item-center justify-between py-3 px-4 md:px-6 max-w-full mx-auto">
