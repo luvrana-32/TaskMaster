@@ -86,7 +86,7 @@ const Login = ({ onSubmit, onSwitchMode }) => {
   ];
 
   return (
-    <div className="max-w-md bg-one/50 w-full shadow-lg border border-one rounded-2xl p-8">
+    <div className="max-w-md bg-one/50 w-full shadow-lg border border-one rounded-3xl p-8">
       <ToastContainer theme="dark" position="top-center" autoClose={3000} hideProgressBar />
 
       <div className="mb-3 text-center">

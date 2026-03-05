@@ -26,7 +26,7 @@ const Navbar = ({ user = {}, onLogout }) => {
   };
   return (
     <header
-      className="sticky top-0 z-50 sm:my-4 sm:mt-0 sm:rounded-b-2xl rounded-b-2xl bg-one/50 
+      className="sticky top-0 z-50 sm:my-4 sm:mt-0 sm:rounded-b-3xl rounded-b-2xl bg-one/50 
       backdrop-blur-xs shadow-sm border-b border-one"
     >
       <div className="flex item-center justify-between py-3 px-4 md:px-6 max-w-full mx-auto">
@@ -100,7 +100,7 @@ const Navbar = ({ user = {}, onLogout }) => {
 
             
               <ul
-                className={`absolute top-14 sm:top-16 right-0 w-56 bg-two lg:bg-two/90 rounded-2xl shadow-2xl 
+                className={`absolute top-14 sm:top-16 right-0 w-56 bg-two lg:bg-two/90 rounded-3xl shadow-2xl 
                 border border-one z-50 overflow-hidden transition-all duration-300 ease-out
                  origin-top-right ${menuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}`}
               >

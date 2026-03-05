@@ -59,7 +59,7 @@ const Signup = ({ onSwitchMode }) => {
   ];
 
   return (
-    <div className="max-w-md w-full bg-one/50 shadow-lg border border-one rounded-2xl p-8">
+    <div className="max-w-md w-full bg-one/50 shadow-lg border border-one rounded-3xl p-8">
       <div className="mb-3 text-center">
         <div
           className="w-16 h-16 bg-linear-to-br from-two to-one rounded-full mx-auto

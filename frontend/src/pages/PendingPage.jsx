@@ -54,7 +54,7 @@ const PendingPage = () => {
       <div className={layoutClasses.headerWrapper}>
         <div
           className="flex flex-col sm:flex-row w-full sm:items-center justify-between bg-one/50
-         rounded-2xl p-4 shadow-sm border border-one gap-3"
+         rounded-3xl p-4 shadow-sm border border-one gap-3"
         >
           <div className="flex items-center gap-3 min-w-0">
             <ListCheckIcon className="w-10 h-10 text-maintxt shrink-0" />

@@ -70,7 +70,7 @@ const Layout = ({ onLogout, user }) => {
   // STATISTIC CARD
   const StatCard = ({ title, value, icon }) => (
     <div
-      className="p-2 sm:p-3 rounded-2xl bg-two/70 shadow-sm border border-one hover:shadow-md 
+      className="p-2 sm:p-3 rounded-3xl bg-two/70 shadow-sm border border-one hover:shadow-md 
     transition-all duration-300 hover:border-maintxt group"
     >
       <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ const Layout = ({ onLogout, user }) => {
           </div>
 
           <div className="xl:col-span-1 space-y-4 sm:space-y-6">
-            <div className="bg-one/50 rounded-2xl p-4 sm:p-5 m-2 sm:m-0 sm:mb-4 shadow-sm border border-one">
+            <div className="bg-one/50 rounded-3xl p-4 sm:p-5 m-2 sm:m-0 sm:mb-4 shadow-sm border border-one">
               <h3
                 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-maintxt flex 
               items-center gap-2"
@@ -206,7 +206,7 @@ const Layout = ({ onLogout, user }) => {
               </div>
             </div>
 
-            <div className="bg-one/50 rounded-2xl p-4 sm:p-5 m-2 sm:m-0 shadow-sm border border-one">
+            <div className="bg-one/50 rounded-3xl p-4 sm:p-5 m-2 sm:m-0 shadow-sm border border-one">
               <h3
                 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-maintxt flex
                items-center gap-2"
@@ -220,7 +220,7 @@ const Layout = ({ onLogout, user }) => {
                   <div
                     key={task._id || task.id}
                     className="flex items-center justify-between p-3
-                  bg-two/70 rounded-2xl transition-colors duration-200 border border-transparent
+                  bg-two/70 rounded-3xl transition-colors duration-200 border border-transparent
                    hover:border-one"
                   >
                     <div className="flex-1 min-w-0">

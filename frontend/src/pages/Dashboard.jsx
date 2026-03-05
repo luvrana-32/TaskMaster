@@ -229,7 +229,7 @@ const Dashboard = () => {
         {/* add task desktop */}
         <div
           className="hidden md:flex items-center justify-center p-2 border-2 border-dashed border-two
-         rounded-xl hover:border-maintxt  text-one hover:text-maintxt bg-one/50 cursor-pointer transition-colors"
+         rounded-2xl hover:border-maintxt  text-one hover:text-maintxt bg-one/50 cursor-pointer transition-colors"
           onClick={() => setShowModel(true)}
         >
           <PlusCircleIcon className="w-5 h-5 mr-2" />

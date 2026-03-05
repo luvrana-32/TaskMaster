@@ -85,7 +85,7 @@ export const INPUT_WRAPPER =
 export const FULL_BUTTON =
   "w-full bg-gradient-to-r from-two to-one text-maintxt py-2.5 rounded-2xl cursor-pointer hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2";
 export const SECTION_WRAPPER =
-  "bg-one/50 rounded-2xl shadow-sm border border-one p-4";
+  "bg-one/50 rounded-3xl shadow-sm border border-one p-4";
 export const BACK_BUTTON =
   "hidden flex items-center text-gray-600 hover:text-purple-600 mb-8 transition-colors duration-200";
 export const DANGER_BTN =
@@ -115,7 +115,7 @@ export const menuItems = [
 
 export const SIDEBAR_CLASSES = {
   desktop:
-    "hidden md:flex flex-col fixed h-full w-20 lg:w-64 bg-one/50 rounded-2xl backdrop-blur-sm border-r border-one shadow-md z-20 transition-all duration-300",
+    "hidden md:flex flex-col fixed h-full w-20 lg:w-64 bg-one/50 rounded-3xl backdrop-blur-sm border-r border-one shadow-md z-20 transition-all duration-300",
   mobileButton:
     "absolute md:hidden inset-x-2 sm:inset-x-4 mt-3 sm:mt-0 flex items-center justify-between bg-one/50 text-maintxt p-2 rounded-2xl shadow-lg border border-one transition",
   mobileDrawerBackdrop: "fixed inset-0 bg-black/40 backdrop-blur-sm",
@@ -126,14 +126,14 @@ export const SIDEBAR_CLASSES = {
 export const LINK_CLASSES = {
   base: "group flex items-center px-4 py-3 rounded-2xl transition-all duration-300",
   active:
-    "bg-gradient-to-r from-two to-one border-l-2 sm:border-l-4 border-one text-maintxt font-medium shadow-sm",
+    "bg-gradient-to-r from-two to-one border-l-2 sm:border-l-3 border-one text-maintxt font-medium shadow-sm",
   inactive: "hover:bg-one/50 text-maintxt/50 hover:text-maintxt",
   icon: "transition-transform duration-300 group-hover:scale-120 text-maintxt",
   text: "text-sm font-medium ml-2",
 };
 
 export const PRODUCTIVITY_CARD = {
-  container: "bg-two/70 rounded-2xl p-3 border border-one",
+  container: "bg-two/70 rounded-3xl p-3 border border-one",
   header: "flex items-center justify-between mb-2",
   label: "text-xs font-semibold text-maintxt",
   badge: "text-xs bg-two/90 text-maintxt px-2 py-0.5 rounded-full",
@@ -144,8 +144,8 @@ export const PRODUCTIVITY_CARD = {
 
 export const TIP_CARD = {
   container:
-    "bg-gradient-to-r from-two to-two/10 rounded-2xl p-4 border border-one",
-  iconWrapper: "p-2 bg-one/50 rounded-lg",
+    "bg-gradient-to-r from-two to-two/10 rounded-3xl p-4 border border-one",
+  iconWrapper: "p-2 bg-one/50 rounded-xl",
   title: "text-sm font-semibold text-maintxt",
   text: "text-xs text-maintxt/50 mt-1",
 };
@@ -192,13 +192,13 @@ export const getPriorityBadgeColor = (priority) => {
 // UI Constants
 export const WRAPPER = "p-2 sm:p-0 h-full overflow-hidden";
 export const HEADER =
-  "flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 md:mb-4 gap-3 rounded-2xl bg-one/50 p-4 border border-one";
+  "flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 md:mb-4 gap-3 rounded-3xl bg-one/50 p-4 border border-one";
 export const ADD_BUTTON =
-  "flex items-center gap-2 bg-gradient-to-r from-two to-one text-maintxt px-4 py-2 rounded-xl shadow-md hover:shadow-lg cursor-pointer md:hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center text-sm md:text-base";
+  "flex items-center gap-2 bg-gradient-to-r from-two to-one text-maintxt px-4 py-2 rounded-2xl shadow-md hover:shadow-lg cursor-pointer md:hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center text-sm md:text-base";
 export const STATS_GRID =
   "grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-3 md:mb-4";
 export const STAT_CARD =
-  "p-3 md:p-4 rounded-2xl bg-one/50 shadow-sm border hover:shadow-md transition-all duration-300 min-w-0";
+  "p-3 md:p-4 rounded-3xl bg-one/50 shadow-sm border hover:shadow-md transition-all duration-300 min-w-0";
 export const ICON_WRAPPER = "p-1.5 md:p-2 rounded-xl";
 export const VALUE_CLASS = "text-lg md:text-2xl font-bold truncate";
 export const LABEL_CLASS = "text-xs text-maintxt truncate";
@@ -256,15 +256,15 @@ export const FILTER_LABELS = {
 
 // Empty state
 export const EMPTY_STATE = {
-  wrapper: "p-6 bg-one/50 rounded-xl shadow-sm border border-one text-center",
+  wrapper: "p-6 bg-one/50 rounded-3xl shadow-sm border border-one text-center",
   iconWrapper:
     "w-16 h-16 bg-one/30 rounded-full flex items-center justify-center mx-auto mb-4",
-  btn: "px-4 py-2 bg-gradient-to-r from-two to-one text-maintxt rounded-lg text-md font-medium hover:shadow-lg cursor-pointer hover:scale-105 transition-all duration-200",
+  btn: "px-4 py-2 bg-gradient-to-r from-two to-one text-maintxt rounded-2xl text-md font-medium hover:shadow-lg cursor-pointer hover:scale-105 transition-all duration-200",
 };
 
 // Filter UI Constants
 export const FILTER_WRAPPER =
-  "flex items-center justify-between bg-one/50 border border-one p-4 rounded-2xl shadow-sm";
+  "flex items-center justify-between bg-one/50 border border-one p-4 rounded-3xl shadow-sm";
 export const SELECT_CLASSES =
   "px-3 py-2 border border-one rounded-xl bg-two/70 outline-none focus:ring-2 focus:ring-one sm:hidden text-sm text-maintxt";
 export const TABS_WRAPPER = "hidden sm:flex space-x-1 bg-two/70 p-1 rounded-xl";
@@ -285,12 +285,12 @@ export const CT_CLASSES = {
   page: "h-full overflow-hidden p-2 sm:p-0",
   header: "flex flex-col w-full mb-3 md:mb-4 gap-3 md:gap-4",
   titleWrapper:
-    "flex flex-col sm:flex-row w-full sm:items-center justify-between bg-one/50 rounded-2xl p-4 shadow-sm border border-one gap-3",
+    "flex flex-col sm:flex-row w-full sm:items-center justify-between bg-one/50 rounded-3xl p-4 shadow-sm border border-one gap-3",
   title: "text-xl md:text-2xl lg:text-3xl font-bold text-maintxt truncate",
   subtitle: "text-xs md:text-sm text-maintxt/50 ml-1",
   sortContainer: "w-full",
   sortBox:
-    "flex w-full items-center justify-between bg-one/50 p-4 rounded-2xl shadow-sm border border-one whitespace-nowrap",
+    "flex w-full items-center justify-between bg-one/50 p-4 rounded-3xl shadow-sm border border-one whitespace-nowrap",
   filterLabel:
     "flex items-center gap-2 text-maintxt font-medium whitespace-nowrap",
   select:
@@ -302,7 +302,7 @@ export const CT_CLASSES = {
   btnInactive: "text-maintxt/50 hover:text-maintxt hover:bg-two rounded-xl",
   list: "space-y-3 md:space-y-4",
   emptyState:
-    "p-6 bg-one/50 rounded-2xl shadow-sm border border-one text-center",
+    "p-6 bg-one/50 rounded-3xl shadow-sm border border-one text-center",
   emptyIconWrapper:
     "w-16 h-16 bg-one/30 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4",
   emptyTitle: "text-lg font-semibold text-maintxt mb-1",
@@ -314,7 +314,7 @@ export const layoutClasses = {
   container: "p-2 sm:p-0 h-full overflow-hidden",
   headerWrapper: "flex flex-col w-full mb-3 md:mb-4 gap-3 md:gap-4",
   sortBox:
-    "flex w-full items-center justify-between bg-one/50 p-4 rounded-2xl shadow-sm border border-one whitespace-nowrap",
+    "flex w-full items-center justify-between bg-one/50 p-4 rounded-3xl shadow-sm border border-one whitespace-nowrap",
   select:
     "px-3 py-2 border border-one rounded-xl bg-two/70 focus:ring-2 focus:ring-one outline-none sm:hidden text-sm text-maintxt",
   tabWrapper: "hidden sm:flex space-x-1 bg-two/70 p-1 rounded-xl ml-2 md:ml-3",
@@ -326,7 +326,7 @@ export const layoutClasses = {
     }`,
   addBox:
     "hidden md:block p-5 border-2 border-dashed border-purple-200 rounded-xl hover:border-purple-400 transition-colors cursor-pointer mb-6 bg-purple-50/50 group",
-  emptyState: "bg-one/50 rounded-2xl shadow-sm border border-one text-center",
+  emptyState: "bg-one/50 rounded-3xl shadow-sm border border-one text-center",
   emptyIconBg:
     "w-16 h-16 bg-one/30 rounded-full flex items-center justify-center mx-auto mb-4",
   emptyBtn:
@@ -351,7 +351,7 @@ export const MENU_OPTIONS = [
 // CSS class groups for TaskItem
 export const TI_CLASSES = {
   wrapper:
-    "group p-4 sm:p-5 rounded-2xl shadow-md bg-one/50 border-l-4 hover:shadow-lg transition-all duration-300 border border-one",
+    "group p-4 sm:p-5 rounded-3xl shadow-md bg-one/50 border-l-4 hover:shadow-lg transition-all duration-300 border border-one",
   leftContainer: "flex items-start gap-2 sm:gap-3 flex-1 min-w-0",
   completeBtn:
     "mt-0.5 sm:mt-1 p-1 sm:p-1.5 rounded-full hover:bg-one/30 transition-colors duration-300",

@@ -124,7 +124,7 @@ const Profile = ({ setCurrentUser, onLogout }) => {
           Back to Dashboard
         </button>
 
-        <div className="flex items-center gap-4 mb-3 sm:mb-4 bg-one/50 rounded-2xl p-4 border border-one">
+        <div className="flex items-center gap-4 mb-3 sm:mb-4 bg-one/50 rounded-3xl p-4 border border-one">
           <div
             className="w-16 h-16 rounded-full bg-linear-to-br from-two to-one
              flex items-center justify-center text-maintxt text-2xl font-bold shadow-md"

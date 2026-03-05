@@ -132,8 +132,8 @@ const Sidebar = ({ user, tasks }) => {
               key={text}
               to={path}
               className={({ isActive }) =>
-                `flex items-start gap-1 px-2 py-2 rounded-2xl text-sm sm:text-base font-medium transition-all
-                  ${isActive ? "bg-two/70 border border-l-3 sm:border-l-4 border-one text-maintxt font-medium shadow-sm"
+                `flex items-start gap-1 px-2 py-2 rounded-3xl text-sm sm:text-base font-medium transition-all
+                  ${isActive ? "bg-two/70 border border-l-3 sm:border-l-3 border-one text-maintxt font-medium shadow-sm"
                      : "hover:bg-two/50 text-maintxt/50 hover:text-maintxt"}`
               }
             >
