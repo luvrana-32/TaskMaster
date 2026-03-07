@@ -82,6 +82,14 @@ const App = () => {
     navigate("/login", { replace: true });
   };
 
+  const ProtectedRoute = ({ currentUser, children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" replace />;
+    }
+
+    return children;
+  };
+
   const ProtectedLayout = () => (
     <Layout user={currentUser} onLogout={handleLogout}>
       <Outlet />
@@ -93,15 +101,16 @@ const App = () => {
       <Route
         path="/login"
         element={
-          <div
-            className="fixed inset-0 bg-basedark bg-opacity-50 flex items-center 
-            justify-center"
-          >
-            <Login
-              onSubmit={handleAuthSubmit}
-              onSwitchMode={() => navigate("/signup")}
-            />
-          </div>
+          currentUser ? (
+            <Navigate to="/" replace />
+          ) : (
+            <div className="fixed inset-0 bg-basedark bg-opacity-50 flex items-center justify-center">
+              <Login
+                onSubmit={handleAuthSubmit}
+                onSwitchMode={() => navigate("/signup")}
+              />
+            </div>
+          )
         }
       />
 
@@ -122,7 +131,9 @@ const App = () => {
 
       <Route
         element={
-          currentUser ? <ProtectedLayout /> : <Navigate to="/login" replace />
+          <ProtectedRoute currentUser={currentUser}>
+            <ProtectedLayout />
+          </ProtectedRoute>
         }
       >
         <Route path="/" element={<Dashboard />} />
