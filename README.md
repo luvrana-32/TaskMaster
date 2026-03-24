@@ -4,6 +4,7 @@ A modern, full-stack **Task Management Application** built using the **MERN** st
 
 The application supports secure authentication, real-time task operations, and a responsive UI optimized for both desktop and mobile users.
 
+Live Demo: https://task-manager-by-aayushshaw.onrender.com/
 ---
 
 ## 🚀 Overview
