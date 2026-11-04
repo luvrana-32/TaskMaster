@@ -4,6 +4,7 @@ import {
   DEFAULT_TASK,
   priorityStyles,
 } from "../assets/dummy";
+import { TASKS_API_URL } from "../config/api";
 import {
   AlignLeft,
   Calendar,
@@ -13,9 +14,6 @@ import {
   Save,
   X,
 } from "lucide-react";
-
-// const API_BASE = "http://localhost:4000/api/tasks";
-const API_BASE = "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
 
 const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
   const [taskData, setTaskData] = useState(DEFAULT_TASK);
@@ -72,7 +70,9 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
 
       try {
         const isEdit = Boolean(taskData.id);
-        const url = isEdit ? `${API_BASE}/${taskData.id}/tm` : `${API_BASE}/tm`;
+        const url = isEdit
+          ? `${TASKS_API_URL}/${taskData.id}/tm`
+          : `${TASKS_API_URL}/tm`;
         const resp = await fetch(url, {
           method: isEdit ? "PUT" : "POST",
           headers: getHeaders(),
@@ -99,9 +99,9 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-blur-sm bg-basedark/70 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 backdrop-blur-sm bg-slate-900/35 z-50 flex items-center justify-center p-4">
       <div
-        className="bg-one/70 border border-one rounded-3xl max-w-md w-full shadow-lg relative p-6
+        className="bg-white border border-slate-200 rounded-3xl max-w-md w-full shadow-2xl relative p-6
        animate-fadeIn"
       >
         <div className="flex justify-between items-center mb-6">
@@ -116,7 +116,7 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
 
           <button
             onClick={onClose}
-            className="p-2 hover:bg-two bg-two/70 rounded-xl transition-colors text-white hover:text-maintxt"
+            className="p-2 hover:bg-slate-100 bg-slate-50 rounded-xl transition-colors text-slate-600 hover:text-slate-900"
           >
             <X className="w-5 h-5" />
           </button>
@@ -137,8 +137,8 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
               Task Title
             </label>
             <div
-              className="flex items-center bg-two/70 border border-one rounded-2xl px-3 py-2.5 focus-within:ring-2
-             focus-within:ring-maintxt focus-within:border-one transition-all duration-200"
+              className="flex items-center bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 focus-within:ring-2
+             focus-within:ring-indigo-500 focus-within:border-indigo-300 transition-all duration-200"
             >
               <input
                 type="text"
@@ -214,7 +214,7 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
                 <label key={val} className="flex items-center">
                   <input
                     type="radio"
-                    className="h-4 w-4 accent-one border-one focus:ring-one"
+                    className="h-4 w-4 accent-indigo-600 border-slate-300 focus:ring-indigo-500"
                     name="completed"
                     value={val}
                     checked={taskData.completed === val}
@@ -227,7 +227,7 @@ const TaskModal = ({ isOpen, onClose, taskToEdit, onSave, onLogout }) => {
           </div>
 
           <button
-            className="w-full bg-linear-to-r from-two to-one text-white font-medium
+            className="w-full bg-linear-to-r from-indigo-600 to-violet-600 text-white font-medium
              py-2.5 px-4 rounded-xl hover:rounded-2xl flex items-center justify-center gap-2 disabled:opacity-50
              hover:shadow-md shadow-sm cursor-pointer transition-all duration-300"
             type="submit"

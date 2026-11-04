@@ -7,14 +7,11 @@ import taskRouter from "./routes/taskRoute.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
+const clientOrigin = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 
-//midleware
-app.use(cors());
+app.use(cors({ origin: clientOrigin }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-//DB connect
-connectDB();
 
 // routes
 app.use("/api/user", userRouter);
@@ -23,6 +20,20 @@ app.use("/api/tasks", taskRouter);
 app.get("/", (req, res) => {
   res.send("APIWorking");
 });
-app.listen(port, () => {
-  console.log(`server started on http://localhost:${port}`);
-});
+const startServer = async () => {
+  try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("Missing required environment variable: JWT_SECRET");
+    }
+
+    await connectDB();
+    app.listen(port, () => {
+      console.log(`server started on http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error.message);
+    process.exitCode = 1;
+  }
+};
+
+startServer();

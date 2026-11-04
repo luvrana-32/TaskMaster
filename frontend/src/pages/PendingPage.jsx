@@ -11,10 +11,6 @@ import { useOutletContext } from "react-router-dom";
 import TaskItem from "../components/TaskItem";
 import TaskModal from "../components/TaskModal";
 
-const API_BASE =
-  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
-// const API_BASE = "http://localhost:4000/api/tasks";
-
 const PendingPage = () => {
   const { tasks = {}, refreshTasks } = useOutletContext();
   const [sortBy, setSortBy] = useState("newest");
@@ -37,24 +33,18 @@ const PendingPage = () => {
     });
   }, [tasks, sortBy]);
 
-  const handleTaskSave = useCallback(async (taskData) => {
-    try {
-      if (taskData.id)
-        await axios.put(`${API_BASE}${taskData.id}/tm`, taskData);
-      refreshTasks();
-      setShowModel(false);
-      setSelectedTask(null);
-    } catch (error) {
-      console.error("Error saving tasks: ", error);
-    }
-  });
+  const handleTaskSave = useCallback(() => {
+    refreshTasks();
+    setShowModel(false);
+    setSelectedTask(null);
+  }, [refreshTasks]);
 
   return (
     <div className={layoutClasses.container}>
       <div className={layoutClasses.headerWrapper}>
         <div
-          className="flex flex-col sm:flex-row w-full sm:items-center justify-between bg-one/50
-         rounded-3xl p-4 shadow-sm border border-one gap-3"
+          className="flex flex-col sm:flex-row w-full sm:items-center justify-between bg-white
+         rounded-3xl p-4 shadow-sm border border-slate-200 gap-3"
         >
           <div className="flex items-center gap-3 min-w-0">
             <ListCheckIcon className="w-10 h-10 text-maintxt shrink-0" />

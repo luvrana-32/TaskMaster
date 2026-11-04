@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { BUTTONCLASSES, INPUTWRAPPER } from "../assets/dummy";
 import axios from "axios";
+import { API_URL } from "../config/api";
 
 const INITIAL_FORM = { email: "", password: "" };
 
@@ -14,16 +15,13 @@ const Login = ({ onSubmit, onSwitchMode }) => {
   const [formData, setFormData] = useState(INITIAL_FORM);
 
   const navigate = useNavigate();
-  const url = "https://personal-task-tracker-app-backend.onrender.com/";
-  // const url = "http://localhost:4000/";
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
     if (token) {
       (async () => {
         try {
-          const { data } = await axios.get(`${url}api/user/me`, {
+          const { data } = await axios.get(`${API_URL}/user/me`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (data.success) {
@@ -49,7 +47,7 @@ const Login = ({ onSubmit, onSwitchMode }) => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(`${url}api/user/login`, formData);
+      const { data } = await axios.post(`${API_URL}/user/login`, formData);
       if (!data.token) throw new Error(data.message || "Login Failed");
 
       localStorage.setItem("token", data.token);
@@ -86,15 +84,15 @@ const Login = ({ onSubmit, onSwitchMode }) => {
   ];
 
   return (
-    <div className="max-w-md bg-one/50 w-full shadow-lg border border-one rounded-3xl p-8">
-      <ToastContainer theme="dark" position="top-center" autoClose={3000} hideProgressBar />
+    <div className="max-w-md bg-white w-full shadow-xl shadow-slate-200/70 border border-slate-200 rounded-3xl p-8">
+      <ToastContainer theme="light" position="top-center" autoClose={3000} hideProgressBar />
 
       <div className="mb-3 text-center">
         <div
-          className="w-16 h-16 bg-linear-to-br from-two to-one shadow-lg rounded-full
+          className="w-16 h-16 bg-linear-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-200 rounded-2xl
          mx-auto flex items-center justify-center mb-3"
         >
-          <LogIn className="w-8 h-8 text-maintxt" />
+          <LogIn className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-3xl font-bold text-maintxt">Welcome Back</h2>
         <p className="text-maintxt/50 text-sm">
@@ -147,8 +145,8 @@ const Login = ({ onSubmit, onSwitchMode }) => {
             id="rememberMe"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
-            className="h-4 w-4 appearance-none bg-two/70 border border-one rounded-md
-     checked:border-maintxt checked:before:content-['✔'] checked:before:text-maintxt checked:before:flex
+            className="h-4 w-4 appearance-none bg-white border border-slate-300 rounded-md accent-indigo-600
+     checked:border-indigo-600 checked:before:content-['✔'] checked:before:text-indigo-700 checked:before:flex
      checked:before:items-center checked:before:justify-center checked:before:-translate-y-1.25"
             required
           />

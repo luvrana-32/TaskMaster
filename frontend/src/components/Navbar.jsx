@@ -26,8 +26,8 @@ const Navbar = ({ user = {}, onLogout }) => {
   };
   return (
     <header
-      className="sticky top-0 z-50 sm:my-4 sm:mt-0 sm:rounded-b-3xl rounded-b-3xl bg-one/50 
-      backdrop-blur-xs shadow-sm border-b border-one"
+      className="sticky top-0 z-50 sm:my-3 sm:mt-0 sm:rounded-3xl rounded-b-3xl bg-white/95
+      backdrop-blur-md shadow-sm border border-slate-200"
     >
       <div className="flex item-center justify-between py-3 px-4 md:px-6 max-w-full mx-auto">
         <div
@@ -35,15 +35,15 @@ const Navbar = ({ user = {}, onLogout }) => {
           onClick={() => navigate("/")}
         >
           <div
-            className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-linear-to-br 
-                from-two to-one shadow-lg group-hover:shadow-basedark/50 
+            className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-linear-to-br
+                from-indigo-600 to-violet-600 shadow-md group-hover:shadow-indigo-200
                 group-hover:scale-105 transition-all duration-300"
           >
-            <BookCheck className="w-6 h-6 text-maintxt" />
+            <BookCheck className="w-6 h-6 text-white" />
           </div>
 
           <span
-            className="text-3xl sm:text-4xl font-extrabold bg-linear-to-r from-maintxt to-one
+            className="text-2xl sm:text-3xl font-extrabold bg-linear-to-r from-indigo-700 to-violet-600
              bg-clip-text text-transparent tracking-wide font-montserrat"
           >
             TaskMaster
@@ -63,8 +63,8 @@ const Navbar = ({ user = {}, onLogout }) => {
           <div ref={menuref} className="relative">
             <button
               onClick={handleMenuToggle}
-              className="flex items-center gap-2 px-2 py-1.5 sm:px-3 sm:py-2.5 bg-two/70 transition-colors duration-300 border 
-                border-transparent hover:border-one rounded-full"
+              className="flex items-center gap-2 px-2 py-1.5 sm:px-3 sm:py-2 bg-slate-50 transition-colors duration-300 border
+                border-slate-200 hover:border-indigo-200 rounded-full"
             >
               <div className="relative">
                 {user.avatar ? (
@@ -75,15 +75,15 @@ const Navbar = ({ user = {}, onLogout }) => {
                   />
                 ) : (
                   <div
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-linear-to-br 
-                        from-two to-one text-maintxt font-white font-semibold shadow-md"
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-100
+                        text-indigo-700 font-semibold shadow-sm"
                   >
                     {user.name?.[0]?.toUpperCase() || "U"}
                   </div>
                 )}
                 <div
-                  className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full 
-                    border-2 border-one animate-pulse"
+                  className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full
+                  border-2 border-white"
                 />
               </div>
               <div className="text-left hidden md:block">
@@ -100,8 +100,8 @@ const Navbar = ({ user = {}, onLogout }) => {
 
             
               <ul
-                className={`absolute top-14 sm:top-16 right-0 w-56 bg-two lg:bg-two/90 rounded-3xl shadow-2xl 
-                border border-one z-50 overflow-hidden transition-all duration-300 ease-out
+                className={`absolute top-14 sm:top-16 right-0 w-56 bg-white rounded-2xl shadow-xl
+                border border-slate-200 z-50 overflow-hidden transition-all duration-300 ease-out
                  origin-top-right ${menuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}`}
               >
                 <li className="p-2 pb-0">
@@ -110,8 +110,8 @@ const Navbar = ({ user = {}, onLogout }) => {
                       setMenuOpen(false);
                       navigate("/profile");
                     }}
-                    className="w-full px-3 py-2.5 text-left hover:bg-one/20 rounded-2xl text-sm text-maintxt 
-                        transition-colors flex items-center gap-2 group bg-one/20 lg:bg-transparent"
+                    className="w-full px-3 py-2.5 text-left hover:bg-slate-50 rounded-xl text-sm text-slate-700
+                        transition-colors flex items-center gap-2 group"
                     role="menuitem"
                   >
                     <UserRoundCogIcon className="w-4 h-4 text-maintxt" />
@@ -122,8 +122,8 @@ const Navbar = ({ user = {}, onLogout }) => {
                 <li className="p-2">
                   <button
                     onClick={handleLogout}
-                    className="flex w-full items-center gap-2 bg-red-500/20 lg:bg-transparent
-                        rounded-2xl px-3 py-2 text-sm hover:bg-red-500/20 text-red-600"
+                    className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm
+                        hover:bg-red-50 text-red-700"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout

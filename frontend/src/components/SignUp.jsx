@@ -7,9 +7,8 @@ import {
   MESSAGE_SUCCESS,
 } from "../assets/dummy";
 import axios from "axios";
+import { API_URL } from "../config/api";
 
-const API_URL = "https://personal-task-tracker-app-backend.onrender.com";
-// const API_URL = "http://localhost:4000";
 const INITIAL_FORM = { name: "", email: "", password: "" };
 
 const Signup = ({ onSwitchMode }) => {
@@ -25,7 +24,7 @@ const Signup = ({ onSwitchMode }) => {
 
     try {
       const { data } = await axios.post(
-        `${API_URL}/api/user/register`,
+        `${API_URL}/user/register`,
         formData,
       );
       console.log("Signup Successfull", data);
@@ -59,17 +58,17 @@ const Signup = ({ onSwitchMode }) => {
   ];
 
   return (
-    <div className="max-w-md w-full bg-one/50 shadow-lg border border-one rounded-3xl p-8">
+    <div className="max-w-md w-full bg-white shadow-xl shadow-slate-200/70 border border-slate-200 rounded-3xl p-8">
       <div className="mb-3 text-center">
         <div
-          className="w-16 h-16 bg-linear-to-br from-two to-one rounded-full mx-auto
+          className="w-16 h-16 bg-linear-to-br from-indigo-600 to-violet-600 rounded-2xl mx-auto
         flex items-center justify-center mb-3"
         >
-          <UserRoundPlus className="w-8 h-8 text-maintxt ml-1" />
+          <UserRoundPlus className="w-8 h-8 text-white ml-1" />
         </div>
         <h2 className="text-3xl font-bold text-maintxt">Create Account</h2>
         <p className="text-maintxt/50 text-sm">
-          Join TaskFlow to manage your tasks
+          Join TaskMaster to manage your tasks
         </p>
       </div>
       {message.text && (

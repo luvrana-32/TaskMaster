@@ -1,33 +1,48 @@
 @import "tailwindcss";
 
 @theme {
-  --color-basedark: #352f44;
-  --color-one: #b9b4c7;
-  --color-two: #5c5470;
-  --color-maintxt: #faf0e6;
+  --color-basedark: #f5f7fb;
+  --color-one: #ffffff;
+  --color-two: #edf1f8;
+  --color-maintxt: #1d2939;
 }
 
 body {
-  font-family: "Fredoka", system-ui, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #1d2939;
+  font-family: "Montserrat", system-ui, sans-serif;
 }
 
 .font-montserrat {
   font-family: "Montserrat", system-ui, sans-serif;
 }
 
-/* 🔥 Chrome autofill FULL override */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill {
-  -webkit-text-fill-color: #faf0e6 !important; /* maintxt */
-  caret-color: #faf0e6 !important;
-
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-  box-shadow: 0 0 0px 1000px transparent inset !important;
-
-  background-color: transparent !important;
+  -webkit-text-fill-color: #1d2939 !important;
+  caret-color: #1d2939 !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  background-color: #ffffff !important;
   transition: background-color 9999s ease-in-out 0s;
+}
+
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
 }
 
 @keyframes dropdown {

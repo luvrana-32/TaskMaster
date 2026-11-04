@@ -22,12 +22,7 @@ import {
 import { Calendar, FilterIcon, HomeIcon, PlusCircleIcon } from "lucide-react";
 import { useOutletContext } from "react-router-dom";
 import TaskItem from "../components/TaskItem";
-import axios from "axios";
 import TaskModal from "../components/TaskModal";
-
-const API_BASE =
-  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
-// const API_BASE = "http://localhost:4000/api/tasks";
 
 const Dashboard = () => {
   const { tasks, refreshTasks } = useOutletContext();
@@ -79,31 +74,25 @@ const Dashboard = () => {
     [tasks, filter],
   );
 
-  const handleTaskSave = useCallback(async (taskData) => {
-    try {
-      if (taskData.id)
-        await axios.put(`${API_BASE}${taskData.id}/tm`, taskData);
-      refreshTasks();
-      setShowModel(false);
-      setSelectedTask(null);
-    } catch (error) {
-      console.error("Error saving tasks: ", error);
-    }
-  });
+  const handleTaskSave = useCallback(() => {
+    refreshTasks();
+    setShowModel(false);
+    setSelectedTask(null);
+  }, [refreshTasks]);
 
   return (
     <div className={WRAPPER}>
       {/* header */}
       <div className={HEADER}>
         <div className="flex gap-4 min-w-0">
-          <div className="flex items-center justify-center shrink-0">
-            <HomeIcon className="w-10 h-10 text-maintxt" />
+          <div className="flex items-center justify-center shrink-0 w-11 h-11 rounded-2xl bg-indigo-50">
+            <HomeIcon className="w-6 h-6 text-indigo-600" />
           </div>
           <div className="flex flex-col min-w-0">
-            <h1 className="text-xl md:text-3xl font-bold text-maintxt leading-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-maintxt leading-tight">
               Task Overview
             </h1>
-            <p className="text-sm text-maintxt/60 leading-tight ml-1">
+            <p className="text-sm text-slate-500 leading-tight ml-1">
               Manage your task efficiently
             </p>
           </div>
@@ -156,7 +145,7 @@ const Dashboard = () => {
         {/* filter */}
         <div className={FILTER_WRAPPER}>
           <div className="flex items-center gap-2 min-w-0">
-            <FilterIcon className="w-5 h-5 text-maintxt shrink-0" />
+            <FilterIcon className="w-5 h-5 text-indigo-600 shrink-0" />
             <h2 className="text-base md:text-lg font-semibold text-maintxt truncate">
               {FILTER_LABELS[filter]}
             </h2>
@@ -228,8 +217,8 @@ const Dashboard = () => {
 
         {/* add task desktop */}
         <div
-          className="hidden md:flex items-center justify-center p-2 border-2 border-dashed border-two
-         rounded-2xl hover:border-maintxt  text-one hover:text-maintxt bg-one/50 cursor-pointer transition-colors"
+          className="hidden md:flex items-center justify-center p-2 border-2 border-dashed border-indigo-200
+         rounded-2xl hover:border-indigo-400 text-indigo-600 hover:text-indigo-700 bg-white cursor-pointer transition-colors"
           onClick={() => setShowModel(true)}
         >
           <PlusCircleIcon className="w-5 h-5 mr-2" />

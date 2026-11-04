@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
-
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_here";
+import { getJwtSecret } from "../config/env.js";
 
 export default async function authMiddleware(req, res, next) {
   // GRAB THE BEARER TOKEN FROM AUTHORIZATION HEADER
@@ -16,7 +15,7 @@ export default async function authMiddleware(req, res, next) {
   // VERIFY & ATTACH USER OBJECT
 
   try {
-    const payload = jwt.verify(token, JWT_SECRET);
+    const payload = jwt.verify(token, getJwtSecret());
     const user = await User.findById(payload.id).select("-password");
 
     if (!user) {
@@ -27,7 +26,7 @@ export default async function authMiddleware(req, res, next) {
     req.user = user;
     next();
   } catch (error) {
-    console.log("JWT verification failed", err);
+    console.error("JWT verification failed:", error.message);
     return res
       .status(401)
       .json({ success: false, message: "Token is invalid or expired" });

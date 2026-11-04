@@ -61,11 +61,11 @@ const Sidebar = ({ user, tasks }) => {
     <>
       {/* Desktop Sidebar */}
       <div className={SIDEBAR_CLASSES.desktop}>
-        <div className="p-5 border-b border-one lg:block hidden">
+        <div className="p-5 border-b border-slate-100 lg:block hidden">
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-full bg-linear-to-br from-two to-one
-             flex items-center justify-center text-maintxt font-bold shadow-md"
+              className="w-10 h-10 rounded-full bg-indigo-100
+             flex items-center justify-center text-indigo-700 font-bold"
             >
               {initial}
             </div>
@@ -74,8 +74,8 @@ const Sidebar = ({ user, tasks }) => {
               <h2 className="text-lg font-bold text-maintxt">
                 Hey, {username}
               </h2>
-              <p className="text-sm text-one font-medium flex items-center gap-1">
-                <Sparkles className="w-3 h-3" /> Let's crush some tasks!
+              <p className="text-xs text-slate-500 font-medium flex items-center gap-1 mt-1">
+                <Sparkles className="w-3 h-3 text-indigo-500" /> Let's get things done
               </p>
             </div>
           </div>
@@ -107,14 +107,15 @@ const Sidebar = ({ user, tasks }) => {
                 <div>
                   <h3 className={TIP_CARD.title}>Pro Tip</h3>
                   <p className={TIP_CARD.text}>
-                    Use keyboard shortcuts to boost productivity
+                    Break big tasks into small steps to make them easier to finish.
                   </p>
                   <a
-                    href="https://aayushshaw.vercel.app/"
+                    href="https://github.com/luvrana-32"
                     target="_blank"
-                    className="block mt-2 text-sm text-maintxt/50 hover:text-maintxt hover:underline"
+                    rel="noreferrer"
+                    className="block mt-2 text-sm text-indigo-600 hover:text-indigo-800 hover:underline"
                   >
-                    Click to Connect
+                    Visit my GitHub
                   </a>
                 </div>
               </div>
@@ -133,8 +134,8 @@ const Sidebar = ({ user, tasks }) => {
               to={path}
               className={({ isActive }) =>
                 `flex items-start gap-1 px-2 py-2 rounded-2xl text-sm sm:text-base font-medium transition-all
-                  ${isActive ? "bg-two/70 border border-l-3 sm:border-l-3 border-one text-maintxt font-medium shadow-sm"
-                     : "hover:bg-two/50 text-maintxt/50 hover:text-maintxt"}`
+                  ${isActive ? "bg-indigo-50 border border-indigo-100 text-indigo-700 font-medium"
+                     : "hover:bg-slate-50 text-slate-500 hover:text-slate-900"}`
               }
             >
               <span className="w-3 h-3 mr-2">{icon}</span>

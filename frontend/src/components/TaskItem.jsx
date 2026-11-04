@@ -9,10 +9,7 @@ import { Calendar, CheckCircle2, Clock, MoreVerticalIcon } from "lucide-react";
 import axios from "axios";
 import { format, isToday } from "date-fns";
 import TaskModal from "./TaskModal";
-
-// const API_BASE = "http://localhost:4000/api/tasks";
-const API_BASE =
-  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
+import { TASKS_API_URL } from "../config/api";
 
 const TaskItem = ({
   task,
@@ -59,7 +56,7 @@ const TaskItem = ({
     const newStatus = isCompleted ? "No" : "Yes";
     try {
       await axios.put(
-        `${API_BASE}/${task._id}/tm`,
+        `${TASKS_API_URL}/${task._id}/tm`,
         { completed: newStatus },
         { headers: getAuthHeaders() },
       );
@@ -79,7 +76,7 @@ const TaskItem = ({
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_BASE}/${task._id}/tm`, {
+      await axios.delete(`${TASKS_API_URL}/${task._id}/tm`, {
         headers: getAuthHeaders(),
       });
       onRefresh?.();
@@ -100,7 +97,7 @@ const TaskItem = ({
         updatedTask,
       );
 
-      await axios.put(`${API_BASE}/${task._id}/tm`, payload, {
+      await axios.put(`${TASKS_API_URL}/${task._id}/tm`, payload, {
         headers: getAuthHeaders(),
       });
       setShowEditModel(false);
@@ -166,8 +163,8 @@ const TaskItem = ({
               disabled={isCompleted}
               className={`${TI_CLASSES.actionBtn} ${
                 isCompleted
-                  ? "bg-green-500/20 text-green-300 cursor-not-allowed"
-                  : "bg-two/70 text-maintxt hover:scale-[1.02] cursor-pointer"
+                  ? "bg-green-50 text-green-700 cursor-not-allowed"
+                  : "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700 hover:scale-[1.02] cursor-pointer"
               }`}
             >
               {isCompleted ? "Completed" : "Complete Task"}

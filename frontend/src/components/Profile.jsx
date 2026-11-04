@@ -20,9 +20,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-const API_URL = "https://personal-task-tracker-app-backend.onrender.com/";
-// const API_URL = "http://localhost:4000/";
+import { API_URL } from "../config/api";
 
 const Profile = ({ setCurrentUser, onLogout }) => {
   const [showPassword, setShowpassword] = useState(false);
@@ -38,7 +36,7 @@ const Profile = ({ setCurrentUser, onLogout }) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     axios
-      .get(`${API_URL}api/user/me`, {
+      .get(`${API_URL}/user/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(({ data }) => {
@@ -54,7 +52,7 @@ const Profile = ({ setCurrentUser, onLogout }) => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.put(
-        `${API_URL}api/user/profile`,
+        `${API_URL}/user/profile`,
         { name: profile.name, email: profile.email },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -81,7 +79,7 @@ const Profile = ({ setCurrentUser, onLogout }) => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.put(
-        `${API_URL}api/user/password`,
+        `${API_URL}/user/password`,
         { currentPassword: passwords.current, newPassword: passwords.new },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -117,17 +115,17 @@ const Profile = ({ setCurrentUser, onLogout }) => {
 
   return (
     <div className="h-full bg-transparent">
-      <ToastContainer theme="dark" position="top-center" autoClose={3000} />
+      <ToastContainer theme="light" position="top-center" autoClose={3000} />
       <div className="w-full p-2 sm:p-0">
         <button onClick={() => navigate("/dashboard")} className={BACK_BUTTON}>
           <ChevronLeft className="w-5 h-5 mr-1" />
           Back to Dashboard
         </button>
 
-        <div className="flex items-center gap-4 mb-3 sm:mb-4 bg-one/50 rounded-3xl p-4 border border-one">
+        <div className="flex items-center gap-4 mb-3 sm:mb-4 bg-white rounded-3xl p-4 border border-slate-200 shadow-sm">
           <div
-            className="w-16 h-16 rounded-full bg-linear-to-br from-two to-one
-             flex items-center justify-center text-maintxt text-2xl font-bold shadow-md"
+            className="w-16 h-16 rounded-2xl bg-indigo-100
+             flex items-center justify-center text-indigo-700 text-2xl font-bold"
           >
             {profile.name ? profile.name[0].toUpperCase() : "U"}
           </div>
@@ -215,7 +213,7 @@ const Profile = ({ setCurrentUser, onLogout }) => {
                 <Shield className="w-4 h-4" /> Change Password
               </button>
 
-              <div className="mt-5 pt-6 border-t border-one">
+              <div className="mt-5 pt-6 border-t border-slate-200">
                 
                 <button className={DANGER_BTN} onClick={onLogout}>
                   <LogOut className="w-4 h-4" /> Logout

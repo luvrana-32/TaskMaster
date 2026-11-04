@@ -2,12 +2,12 @@ import User from "../models/userModel.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { getJwtSecret } from "../config/env.js";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_here";
 const TOKEN_EXPIRES = "24h";
 
 const createToken = (userId) =>
-  jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: TOKEN_EXPIRES });
+  jwt.sign({ id: userId }, getJwtSecret(), { expiresIn: TOKEN_EXPIRES });
 
 // REGISTER FUNCTION
 export async function registerUser(req, res) {

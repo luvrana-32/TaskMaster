@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import { Circle, Clock, TrendingUp } from "lucide-react";
+import { TASKS_API_URL } from "../config/api";
 
 const Layout = ({ onLogout, user }) => {
   const [tasks, setTasks] = useState([]);
@@ -17,7 +18,7 @@ const Layout = ({ onLogout, user }) => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("NO auth token found");
 
-      const { data } = await axios.get("https://personal-task-tracker-app-backend.onrender.com/api/tasks/tm", {
+      const { data } = await axios.get(`${TASKS_API_URL}/tm`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // const { data } = await axios.get("http://localhost:4000/api/tasks/tm", {
@@ -70,24 +71,23 @@ const Layout = ({ onLogout, user }) => {
   // STATISTIC CARD
   const StatCard = ({ title, value, icon }) => (
     <div
-      className="p-2 sm:p-3 rounded-3xl bg-two/70 shadow-sm border border-one hover:shadow-md 
-    transition-all duration-300 hover:border-maintxt group"
+      className="p-2 sm:p-3 rounded-2xl bg-slate-50 shadow-sm border border-slate-100 hover:shadow-md
+    transition-all duration-300 hover:border-indigo-200 group"
     >
       <div className="flex items-center gap-2">
         <div
-          className="p-1.5 rounded-lg bg-linear-to-br from-two/30 to-maintxt/30 
-        group-hover:from-two/50 group-hover:to-maintxt/50"
+          className="p-1.5 rounded-lg bg-indigo-50 group-hover:bg-indigo-100"
         >
           {icon}
         </div>
         <div className="min-w-0">
           <p
-            className="text-lg sm:text-xl font-bold bg-linear-to-r from-maintxt/70 to-two 
+            className="text-lg sm:text-xl font-bold bg-linear-to-r from-indigo-700 to-violet-600
           bg-clip-text text-transparent"
           >
             {value}
           </p>
-          <p className="text-sm text-maintxt/50 font-medium">{title}</p>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium">{title}</p>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@ const Layout = ({ onLogout, user }) => {
   if (loading)
     return (
       <div className="min-h-screen bg-basedark flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-one" />
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600" />
       </div>
     );
 
@@ -120,18 +120,18 @@ const Layout = ({ onLogout, user }) => {
     );
 
   return (
-    <div className="min-h-screen bg-basedark sm:p-4 sm:pt-0">
+    <div className="min-h-screen bg-basedark sm:p-3 sm:pt-0">
       <Navbar user={user} onLogout={onLogout} />
       <Sidebar user={user} tasks={tasks} />
 
       <div className="ml-0 xl:ml-64 lg:ml-64 md:ml-16 pt-18 md:pl-4 md:pt-0 transition-all duration-300">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-5 max-w-[1600px] mx-auto">
           <div className="xl:col-span-2 space-y-3 sm:space-y-4">
             <Outlet context={{ tasks, refreshTasks: fetchTasks }} />
           </div>
 
           <div className="xl:col-span-1 space-y-4 sm:space-y-6">
-            <div className="bg-one/50 rounded-3xl p-4 sm:p-5 m-2 sm:m-0 sm:mb-4 shadow-sm border border-one">
+            <div className="bg-white rounded-3xl p-4 sm:p-5 m-2 sm:m-0 sm:mb-4 shadow-sm border border-slate-200">
               <h3
                 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-maintxt flex 
               items-center gap-2"
@@ -155,7 +155,7 @@ const Layout = ({ onLogout, user }) => {
                   value={stats.completedTasks}
                   icon={
                     <Circle
-                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-300"
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600"
                     />
                   }
                 />
@@ -179,25 +179,25 @@ const Layout = ({ onLogout, user }) => {
                 />
               </div>
 
-              <hr className="my-3 sm:my-4 border-one" />
+              <hr className="my-3 sm:my-4 border-slate-100" />
 
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center justify-between text-maintxt">
                   <span className="text-xs sm:text-sm font-medium flex items-center gap-1.5">
-                    <Circle className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-one fill-one" />
+                    <Circle className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-indigo-500 fill-indigo-500" />
                     Task Progress
                   </span>
-                  <span className="text-xs bg-two/70 text-maintxt px-1.5 py-0.5 sm:px-2 rounded-full">
+                  <span className="text-xs bg-indigo-50 text-indigo-700 px-1.5 py-0.5 sm:px-2 rounded-full">
                     {stats.completedTasks} / {stats.totalCount}
                   </span>
                 </div>
 
                 <div className="relative pt-1">
                   <div className="flex gap-1.5 items-center">
-                    <div className="flex-1 h-3 bg-two/70 rounded-full overflow-hidden">
+                    <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-linear-to-r from-two to-maintxt rounded-full transition-all
-                       duration-500 animate-pulse"
+                        className="h-full bg-linear-to-r from-indigo-600 to-violet-500 rounded-full transition-all
+                       duration-500"
                         style={{ width: `${stats.completionPercentage}%` }}
                       />
                     </div>
@@ -206,7 +206,7 @@ const Layout = ({ onLogout, user }) => {
               </div>
             </div>
 
-            <div className="bg-one/50 rounded-3xl p-4 sm:p-5 m-2 sm:m-0 shadow-sm border border-one">
+            <div className="bg-white rounded-3xl p-4 sm:p-5 m-2 sm:m-0 shadow-sm border border-slate-200">
               <h3
                 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-maintxt flex
                items-center gap-2"
@@ -220,8 +220,8 @@ const Layout = ({ onLogout, user }) => {
                   <div
                     key={task._id || task.id}
                     className="flex items-center justify-between p-3
-                  bg-two/70 rounded-3xl transition-colors duration-200 border border-transparent
-                   hover:border-one"
+                  bg-slate-50 rounded-2xl transition-colors duration-200 border border-transparent
+                   hover:border-slate-200"
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-maintxt truncate whitespace-normal">
@@ -238,8 +238,8 @@ const Layout = ({ onLogout, user }) => {
                       className={`px-2 py-1 text-xs rounded-full shrink-0 ml-2
                       ${
                         task.completed
-                          ? "bg-green-500/20 text-green-300"
-                          : "bg-one/10 text-maintxt"
+                          ? "bg-green-50 text-green-700"
+                          : "bg-amber-50 text-amber-700"
                       }`}
                     >
                       {task.completed ? "Done" : "Pending"}

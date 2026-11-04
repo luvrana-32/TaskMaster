@@ -5,10 +5,6 @@ import { useOutletContext } from "react-router-dom";
 import TaskItem from "../components/TaskItem";
 import TaskModal from "../components/TaskModal";
 
-const API_BASE =
-  "https://personal-task-tracker-app-backend.onrender.com/api/tasks";
-// const API_BASE = "http://localhost:4000/api/tasks";
-
 const CompletePage = () => {
   const { tasks = [], refreshTasks } = useOutletContext();
   const [sortBy, setSortBy] = useState("newest");
@@ -42,17 +38,11 @@ const CompletePage = () => {
       });
   }, [tasks, sortBy]);
 
-  const handleTaskSave = useCallback(async (taskData) => {
-    try {
-      if (taskData.id)
-        await axios.put(`${API_BASE}${taskData.id}/tm`, taskData);
-      refreshTasks();
-      setShowModel(false);
-      setSelectedTask(null);
-    } catch (error) {
-      console.error("Error saving tasks: ", error);
-    }
-  });
+  const handleTaskSave = useCallback(() => {
+    refreshTasks();
+    setShowModel(false);
+    setSelectedTask(null);
+  }, [refreshTasks]);
 
   return (
     <div className={CT_CLASSES.page}>
